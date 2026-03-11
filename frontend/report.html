@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Report New Issue</title>
+
+<style>
+
+/* ===== RESET ===== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+}
+
+body{
+    background:#f3f4f6;
+    display:flex;
+    height:100vh;
+    color:#111827;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+    width:230px;
+    background:#f9fafb;
+    border-right:1px solid #e5e7eb;
+    padding:30px 20px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:20px;
+    font-weight:600;
+    color:#2563eb;
+    margin-bottom:40px;
+}
+
+.menu a{
+    display:block;
+    padding:12px 14px;
+    border-radius:10px;
+    text-decoration:none;
+    color:#374151;
+    margin-bottom:8px;
+    font-size:15px;
+}
+
+.menu a.active{
+    background:#e0e7ff;
+    color:#1d4ed8;
+    font-weight:500;
+}
+
+.user{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    border-top:1px solid #e5e7eb;
+    padding-top:20px;
+    font-size:14px;
+}
+
+.avatar{
+    width:36px;
+    height:36px;
+    background:#d1d5db;
+    border-radius:50%;
+}
+
+/* ===== MAIN ===== */
+.main{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+}
+
+/* ===== HEADER ===== */
+.header{
+    background:white;
+    padding:20px 40px;
+    border-bottom:1px solid #e5e7eb;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.header h2{
+    font-size:20px;
+    font-weight:600;
+}
+
+.icons{
+    display:flex;
+    gap:20px;
+    color:#6b7280;
+}
+
+/* ===== CONTENT AREA ===== */
+.content{
+    padding:40px;
+    overflow-y:auto;
+}
+
+/* ===== STEP PROGRESS ===== */
+.steps{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:40px;
+}
+
+.step{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    font-size:14px;
+    color:#9ca3af;
+}
+
+.circle{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:#e5e7eb;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:6px;
+    font-weight:600;
+}
+
+.step.active .circle{
+    background:#2563eb;
+    color:white;
+}
+
+.step.active{
+    color:#1d4ed8;
+}
+
+.line{
+    height:3px;
+    width:140px;
+    background:#e5e7eb;
+    margin:0 15px;
+    margin-bottom:25px;
+}
+
+/* ===== CARD ===== */
+.card{
+    background:white;
+    border-radius:16px;
+    padding:40px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+    max-width:850px;
+    margin:0 auto;
+}
+
+.card h3{
+    font-size:22px;
+    margin-bottom:8px;
+}
+
+.card p{
+    color:#6b7280;
+    font-size:14px;
+    margin-bottom:30px;
+}
+
+/* ===== FORM ===== */
+.form-group{
+    margin-bottom:25px;
+}
+
+label{
+    font-size:14px;
+    display:block;
+    margin-bottom:8px;
+    font-weight:500;
+}
+
+input, textarea, select{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:1px solid #d1d5db;
+    font-size:14px;
+}
+
+input:focus, textarea:focus, select:focus{
+    outline:none;
+    border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37,99,235,0.15);
+}
+
+/* ===== TOOLBAR ===== */
+.toolbar{
+    border:1px solid #d1d5db;
+    border-bottom:none;
+    padding:10px;
+    border-radius:12px 12px 0 0;
+    background:#f9fafb;
+    font-size:14px;
+    color:#6b7280;
+}
+
+textarea{
+    border-radius:0 0 12px 12px;
+    min-height:140px;
+}
+
+/* ===== UPLOAD BOX ===== */
+.upload{
+    border:2px dashed #d1d5db;
+    border-radius:14px;
+    padding:40px;
+    text-align:center;
+    background:#f9fafb;
+    color:#6b7280;
+    cursor:pointer;
+}
+
+.upload:hover{
+    background:#f3f4f6;
+}
+
+/* ===== FOOTER ACTION BAR ===== */
+.action-bar{
+    background:white;
+    border-top:1px solid #e5e7eb;
+    padding:20px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.action-left{
+    font-size:14px;
+    color:#6b7280;
+}
+
+.buttons{
+    display:flex;
+    gap:20px;
+}
+
+.btn{
+    padding:12px 20px;
+    border-radius:12px;
+    font-size:14px;
+    cursor:pointer;
+    border:none;
+}
+
+.btn-outline{
+    background:white;
+    border:1px solid #d1d5db;
+}
+
+.btn-primary{
+    background:linear-gradient(to right,#2563eb,#1d4ed8);
+    color:white;
+    box-shadow:0 10px 25px rgba(37,99,235,0.3);
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <div>
+        <div class="logo">IssueTrack</div>
+        <div class="menu"></div>
+            <a href="report.html" class="active">Report Issue</a>
+            
+        </div>
+    </div>
+
+    <div class="user">
+        <div class="avatar"></div>
+        <div>
+            <div><strong>Alex Henderson</strong></div>
+            <div style="font-size:12px;color:#9ca3af;">Senior Developer</div>
+        </div>
+    </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h2>Report New Issue</h2>
+        <div class="icons">🔔 ❓</div>
+    </div>
+
+    <div class="content">
+
+        <!-- STEPS -->
+        <div class="steps">
+            <div class="step active">
+                <div class="circle">1</div>
+                Details
+            </div>
+
+            <div class="line"></div>
+
+            <div class="step">
+                <div class="circle">2</div>
+                Categorization
+            </div>
+
+            <div class="line"></div>
+
+            <div class="step">
+                <div class="circle">3</div>
+                Review
+            </div>
+        </div>
+
+        <!-- CARD -->
+        <div class="card">
+
+            <h3>Issue Details</h3>
+            <p>Provide a clear title and description of the problem you're encountering.</p>
+
+            <div class="form-group">
+                <label>Issue Title *</label>
+                <input type="text" id="title" placeholder="e.g., System login timeout on Chrome browser">
+            </div>
+
+            <div class="form-group">
+                <label>Detailed Description *</label>
+
+                <div class="toolbar">
+                    B &nbsp; I &nbsp; • List &nbsp; • Link
+                </div>
+                <textarea id="description" placeholder="Describe the steps to reproduce, expected vs actual behavior..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Category *</label>
+                <select id="category">
+                    <option value="">Select Category</option>
+                    <option value="Hardware">Hardware</option>
+                    <option value="Software">Software</option>
+                    <option value="Network">Network</option>
+                    <option value="Security">Security</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Team *</label>
+                <select id="team">
+                    <option value="">Select Team</option>
+                    <option value="IT Support">IT Support</option>
+                    <option value="Operations">Operations</option>
+                    <option value="Development">Development</option>
+                    <option value="Finance">Finance</option>
+                    <option value="General">General</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Priority *</label>
+                <select id="priority">
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Attachments (Screenshots/Logs)</label>
+                <div class="upload">
+                    Click to upload or drag and drop<br>
+                    <small>PNG, JPG, PDF or LOG up to 10MB</small>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ACTION BAR -->
+    <div class="action-bar">
+        <div class="action-left">● Auto-saved at 10:42 AM</div>
+
+        <div class="buttons">
+            <button class="btn btn-outline">Save as Draft</button>
+            <button class="btn btn-outline" onclick="window.location.href='dashboard.html'">Back</button>
+            <button class="btn btn-primary" onclick="submitIssue()">Submit Issue</button>
+        </div>
+    </div>
+
+</div>
+<script src="app.js"></script>
+<script>
+function submitIssue() {
+    const title = document.getElementById("title").value;
+    const description = document.getElementById("description").value;
+    const category = document.getElementById("category").value;
+    const team = document.getElementById("team").value;
+    const priority = document.getElementById("priority").value;
+    
+    if(!title || !description) {
+        return;
+    }
+    
+    const issueData = {
+        title: title,
+        description: description,
+        category: category || "General",
+        team: team || "General",
+        priority: priority || "Medium"
+    };
+
+    addIssue(issueData);
+
+    window.location.href = "dashboard.html";
+}
+</script>
+</body>
+</html>

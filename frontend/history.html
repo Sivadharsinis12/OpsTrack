@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Resolution History</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+/* ================= ROOT ================= */
+
+:root{
+    --primary:#2563eb;
+    --bg:#f3f4f6;
+    --white:#ffffff;
+    --gray-100:#f9fafb;
+    --gray-200:#e5e7eb;
+    --gray-300:#d1d5db;
+    --gray-400:#9ca3af;
+    --gray-600:#4b5563;
+    --gray-800:#1f2937;
+    --green:#22c55e;
+    --red:#ef4444;
+    --orange:#f59e0b;
+    --blue:#3b82f6;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",sans-serif;
+}
+
+body{
+    background:var(--bg);
+    display:flex;
+    min-height:100vh;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+    width:240px;
+    background:var(--white);
+    border-right:1px solid var(--gray-200);
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    padding:20px 0;
+}
+
+.logo{
+    font-weight:600;
+    font-size:20px;
+    padding:0 20px 30px 20px;
+    color:var(--primary);
+}
+
+.nav-item{
+    padding:12px 20px;
+    color:var(--gray-600);
+    cursor:pointer;
+}
+
+.nav-item.active{
+    background:rgba(37,99,235,.1);
+    color:var(--primary);
+    border-radius:6px;
+    margin:0 10px;
+    font-weight:600;
+}
+
+.settings{
+    padding:20px;
+    font-size:14px;
+    color:var(--gray-400);
+}
+
+/* ================= MAIN ================= */
+
+.main{
+    flex:1;
+    padding:30px;
+}
+
+/* ================= HEADER ================= */
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.title{
+    font-size:24px;
+    font-weight:600;
+    color:var(--gray-800);
+}
+
+.subtitle{
+    font-size:14px;
+    color:var(--gray-400);
+}
+
+.btn{
+    padding:8px 14px;
+    border-radius:8px;
+    border:1px solid var(--gray-200);
+    background:var(--white);
+    cursor:pointer;
+}
+
+.btn.primary{
+    background:rgba(37,99,235,.1);
+    color:var(--primary);
+    border:none;
+}
+
+/* ================= FILTERS ================= */
+
+.filters{
+    background:var(--white);
+    padding:20px;
+    border-radius:12px;
+    border:1px solid var(--gray-200);
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.filters input, .filters select{
+    padding:10px;
+    border:1px solid var(--gray-200);
+    border-radius:8px;
+    background:var(--gray-100);
+}
+
+/* ================= TABLE ================= */
+
+.table-card{
+    background:var(--white);
+    border-radius:12px;
+    border:1px solid var(--gray-200);
+    overflow:hidden;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th, td{
+    padding:16px;
+    text-align:left;
+    font-size:14px;
+}
+
+th{
+    color:var(--gray-400);
+    font-weight:500;
+    background:var(--gray-100);
+}
+
+tr{
+    border-bottom:1px solid var(--gray-200);
+}
+
+.expand{
+    cursor:pointer;
+    font-weight:600;
+}
+
+.status{
+    padding:5px 10px;
+    border-radius:12px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.resolved{background:rgba(34,197,94,.15);color:var(--green);}
+.pending{background:rgba(245,158,11,.15);color:var(--orange);}
+.error{background:rgba(239,68,68,.15);color:var(--red);}
+.info{background:rgba(59,130,246,.15);color:var(--blue);}
+
+.priority{
+    padding:5px 10px;
+    border-radius:12px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.high{background:rgba(239,68,68,.15);color:var(--red);}
+.medium{background:rgba(245,158,11,.15);color:var(--orange);}
+.low{background:rgba(34,197,94,.15);color:var(--green);}
+
+/* ================= EXPANDED SECTION ================= */
+
+.details-row{
+    display:none;
+    background:var(--gray-100);
+}
+
+.details{
+    padding:20px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.box{
+    background:white;
+    padding:15px;
+    border-radius:10px;
+    border:1px solid var(--gray-200);
+}
+
+.box h4{
+    margin-bottom:10px;
+    font-size:14px;
+    color:var(--gray-600);
+}
+
+/* ================= PAGINATION ================= */
+
+.pagination{
+    padding:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:14px;
+    color:var(--gray-400);
+}
+
+.pages span{
+    padding:6px 10px;
+    margin:0 4px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.pages .active{
+    background:var(--primary);
+    color:white;
+}
+
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+    <div>
+        <div class="logo">IssueTrack</div>
+        <div class="nav-item" onclick="window.location.href='dashboard.html'">Dashboard</div>
+        <div class="nav-item active" onclick="window.location.href='history.html'">History</div>
+    </div>
+    <div class="settings">Marcus Chen<br><small>Senior Admin</small></div>
+</div>
+
+<div class="main">
+
+    <div class="header">
+        <div>
+            <div class="title">Issue Resolution History</div>
+            <div class="subtitle">Review and audit completed tickets across all departments.</div>
+        </div>
+        <div>
+            <button onclick="exportCSV()" class="btn primary">Export CSV</button>
+            <button onclick="exportPDF()" class="btn">Export PDF</button>
+        </div>
+    </div>
+
+    <div class="filters">
+        <input type="text" id="searchInput" placeholder="Issue ID, keyword...">
+        <select id="teamFilter"><option value="">All Teams</option><option value="IT Support">IT Support</option><option value="Operations">Operations</option><option value="Development">Development</option><option value="Finance">Finance</option><option value="General">General</option></select>
+        <select id="statusFilter"><option value="">All Statuses</option><option value="Pending">Pending</option><option value="In Progress">In Progress</option><option value="Resolved">Resolved</option></select>
+        <select id="dateFilter">
+            <option value="">All Time</option>
+            <option value="today">Today</option>
+            <option value="lastweek">Last Week</option>
+            <option value="last15">Last 15 Days</option>
+            <option value="last30">Last 30 Days</option>
+        </select>
+    </div>
+
+    <div class="table-card">
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>ISSUE ID</th>
+                    <th>TITLE</th>
+                    <th>CATEGORY</th>
+                    <th>PRIORITY</th>
+                    <th>TEAM</th>
+                    <th>DATE CREATED</th>
+                    <th>TIME</th>
+                    <th>DATE CLOSED</th>
+                    <th>STATUS</th>
+                </tr>
+            </thead>
+            <tbody id="historyTable"></tbody>
+        </table>
+
+        <div class="pagination">
+            <div id="resultCount"></div>
+            <div class="pages"><span class="active">1</span></div>
+        </div>
+    </div>
+
+</div>
+
+<script src="app.js"></script>
+<script>
+
+/* -------- Load Data -------- */
+
+let issues = getIssues();
+
+let table = document.getElementById("historyTable");
+
+// Pre-populate unique teams and statuses from all data
+let teamSet = new Set();
+let statusSet = new Set();
+let categorySet = new Set();
+
+issues.forEach(issue => {
+    teamSet.add(issue.team || "General");
+    statusSet.add(issue.status || "Pending");
+    categorySet.add(issue.category || "General");
+});
+
+/* -------- Render Table -------- */
+
+function renderTable(data){
+
+    table.innerHTML="";
+    data.forEach((issue,index)=>{
+
+        let priorityClass = issue.priority ? issue.priority.toLowerCase() : "medium";
+
+        let row = document.createElement("tr");
+        row.innerHTML = `
+            <td class="expand" onclick="toggleDetails(${index})">⌄</td>
+            <td>${issue.id}</td>
+            <td>${issue.title || "Untitled Issue"}</td>
+            <td>${issue.category || "General"}</td>
+            <td><span class="priority ${priorityClass}">${issue.priority || "Medium"}</span></td>
+            <td>${issue.team || "General"}</td>
+            <td>${issue.dateCreated || "-"}</td>
+            <td>${issue.timeCreated || "-"}</td>
+            <td>${issue.dateClosed || "-"}</td>
+            <td><span class="status ${getStatusClass(issue.status)}">${issue.status}</span></td>
+        `;
+
+        let detailRow = document.createElement("tr");
+        detailRow.classList.add("details-row");
+        detailRow.id="detail-"+index;
+        detailRow.innerHTML=`
+            <td colspan="10">
+                <div class="details">
+                    <div class="box">
+                        <h4>Description</h4>
+                        ${issue.description || "No description."}
+                    </div>
+                    <div class="box">
+                        <h4>Resolution Steps</h4>
+                        ${issue.resolution || "No resolution notes."}
+                    </div>
+                </div>
+            </td>
+        `;
+
+        table.appendChild(row);
+        table.appendChild(detailRow);
+    });
+
+    document.getElementById("resultCount").innerText =
+        "Showing 1-" + data.length + " of " + data.length + " results";
+
+    populateFilters();
+}
+
+function toggleDetails(i){
+    let row = document.getElementById("detail-"+i);
+    row.style.display = row.style.display==="table-row" ? "none":"table-row";
+}
+
+function getStatusClass(status){
+    if(!status) return "pending";
+    status=status.toLowerCase();
+    if(status.includes("resolved")) return "resolved";
+    if(status.includes("error")) return "error";
+    if(status.includes("info")) return "info";
+    return "pending";
+}
+
+/* -------- Filters -------- */
+
+let filtersInitialized = false;
+
+function populateFilters(){
+    if (filtersInitialized) return; // Only run once
+    
+    let teamFilter = document.getElementById("teamFilter");
+    let statusFilter = document.getElementById("statusFilter");
+    
+    // Add dynamic team options
+    teamSet.forEach(team=>{
+        teamFilter.innerHTML += `<option value="${team}">${team}</option>`;
+    });
+
+    // Add dynamic status options
+    statusSet.forEach(status=>{
+        statusFilter.innerHTML += `<option value="${status}">${status}</option>`;
+    });
+    
+    filtersInitialized = true;
+}
+
+/* -------- Auto-resolve issues after 15 hours -------- */
+
+function autoResolveOldIssues() {
+    let issues = getIssues();
+    let updated = false;
+    
+    issues = issues.map(issue => {
+        if (issue.status === "Pending" || issue.status === "In Progress") {
+            // Parse the created date and time
+            const createdDate = issue.dateCreated;
+            const createdTime = issue.timeCreated;
+            
+            if (createdDate && createdTime) {
+                // Create date object from stored date and time
+                const dateTimeStr = createdDate + ' ' + createdTime;
+                const createdDateTime = new Date(dateTimeStr);
+                const now = new Date();
+                
+                // Calculate hours difference
+                const hoursDiff = (now - createdDateTime) / (1000 * 60 * 60);
+                
+                // Auto-resolve if older than 15 hours
+                if (hoursDiff >= 15) {
+                    issue.status = "Resolved";
+                    issue.dateClosed = new Date().toLocaleDateString();
+                    issue.resolution = "Auto-resolved after 15 hours";
+                    updated = true;
+                }
+            }
+        }
+        return issue;
+    });
+    
+    if (updated) {
+        saveIssues(issues);
+    }
+}
+
+// Run auto-resolve on page load
+autoResolveOldIssues();
+
+/* -------- Apply Filters -------- */
+
+function applyFilters() {
+    const searchValue = document.getElementById("searchInput").value.toLowerCase();
+    const teamValue = document.getElementById("teamFilter").value;
+    const statusValue = document.getElementById("statusFilter").value;
+    const dateValue = document.getElementById("dateFilter").value;
+    
+    // Get today's date as a string for comparison
+    const todayStr = new Date().toLocaleDateString();
+    
+    let filtered = issues.filter(issue => {
+        // Search filter
+        const matchesSearch = !searchValue || 
+            (issue.id && issue.id.toLowerCase().includes(searchValue)) ||
+            (issue.title && issue.title.toLowerCase().includes(searchValue)) ||
+            (issue.category && issue.category.toLowerCase().includes(searchValue));
+        
+        // Team filter
+        const matchesTeam = !teamValue || issue.team === teamValue;
+        
+        // Status filter
+        const matchesStatus = !statusValue || issue.status === statusValue;
+        
+        // Date filter
+        let matchesDate = true;
+        if (dateValue && issue.dateCreated) {
+            const issueDateStr = issue.dateCreated;
+            
+            if (dateValue === "today") {
+                // Today - compare date strings directly
+                matchesDate = issueDateStr === todayStr;
+            } else if (dateValue === "lastweek") {
+                // Last 7 days - parse the issue date and compare
+                const issueDate = new Date(issueDateStr);
+                if (!isNaN(issueDate.getTime())) {
+                    const weekAgo = new Date();
+                    weekAgo.setDate(weekAgo.getDate() - 7);
+                    weekAgo.setHours(0, 0, 0, 0);
+                    issueDate.setHours(0, 0, 0, 0);
+                    matchesDate = issueDate >= weekAgo;
+                }
+            } else if (dateValue === "last15") {
+                // Last 15 days
+                const issueDate = new Date(issueDateStr);
+                if (!isNaN(issueDate.getTime())) {
+                    const fifteenDaysAgo = new Date();
+                    fifteenDaysAgo.setDate(fifteenDaysAgo.getDate() - 15);
+                    fifteenDaysAgo.setHours(0, 0, 0, 0);
+                    issueDate.setHours(0, 0, 0, 0);
+                    matchesDate = issueDate >= fifteenDaysAgo;
+                }
+            } else if (dateValue === "last30") {
+                // Last 30 days
+                const issueDate = new Date(issueDateStr);
+                if (!isNaN(issueDate.getTime())) {
+                    const thirtyDaysAgo = new Date();
+                    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+                    thirtyDaysAgo.setHours(0, 0, 0, 0);
+                    issueDate.setHours(0, 0, 0, 0);
+                    matchesDate = issueDate >= thirtyDaysAgo;
+                }
+            }
+        }
+        
+        return matchesSearch && matchesTeam && matchesStatus && matchesDate;
+    });
+    
+    renderTable(filtered);
+}
+
+/* -------- Search -------- */
+
+document.getElementById("searchInput").addEventListener("input", applyFilters);
+document.getElementById("teamFilter").addEventListener("change", applyFilters);
+document.getElementById("statusFilter").addEventListener("change", applyFilters);
+document.getElementById("dateFilter").addEventListener("change", applyFilters);
+
+/* -------- Init -------- */
+
+renderTable(issues);
+
+</script>
+</body>
+</html>

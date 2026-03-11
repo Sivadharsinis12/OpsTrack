@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>IssueTracker</title>
+
+<style>
+
+/* ================= RESET ================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+body{
+    background:#f3f4f6;
+    color:#111827;
+}
+
+/* ================= NAVBAR ================= */
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 60px;
+    background:#ffffff;
+    border-bottom:1px solid #e5e7eb;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-weight:600;
+    font-size:18px;
+}
+
+.logo-icon{
+    width:34px;
+    height:34px;
+    background:#2563eb;
+    border-radius:8px;
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:30px;
+    font-size:14px;
+    color:#374151;
+}
+
+.status-pill{
+    background:#dcfce7;
+    color:#166534;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:500;
+}
+
+/* ================= HERO SECTION ================= */
+.container{
+    display:flex;
+    justify-content:space-between;
+    padding:80px 60px;
+}
+
+.left{
+    width:52%;
+}
+
+.badge{
+    display:inline-block;
+    background:#e0e7ff;
+    color:#1d4ed8;
+    font-size:12px;
+    padding:6px 12px;
+    border-radius:20px;
+    margin-bottom:20px;
+    letter-spacing:0.5px;
+}
+
+.left h1{
+    font-size:60px;
+    line-height:1.1;
+    margin-bottom:25px;
+}
+
+.left h1 span{
+    color:#2563eb;
+}
+
+.left p{
+    font-size:18px;
+    color:#4b5563;
+    line-height:1.6;
+    margin-bottom:35px;
+}
+
+.buttons{
+    display:flex;
+    gap:20px;
+    margin-bottom:50px;
+}
+
+.btn-primary{
+    background:linear-gradient(to right,#2563eb,#1d4ed8);
+    color:white;
+    padding:14px 24px;
+    border-radius:12px;
+    font-weight:500;
+    border:none;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(37,99,235,0.3);
+}
+
+.btn-secondary{
+    background:white;
+    border:1px solid #d1d5db;
+    padding:14px 24px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:500;
+}
+
+/* ================= LOGIN CARD ================= */
+.right{
+    width:40%;
+    display:flex;
+    justify-content:center;
+}
+
+.login-card{
+    width:100%;
+    background:white;
+    padding:40px;
+    border-radius:18px;
+    box-shadow:0 25px 50px rgba(0,0,0,0.08);
+}
+
+.login-card h2{
+    font-size:26px;
+    margin-bottom:8px;
+}
+
+.login-card p{
+    font-size:14px;
+    color:#6b7280;
+    margin-bottom:25px;
+}
+
+.form-group{
+    margin-bottom:20px;
+}
+
+.form-group label{
+    font-size:14px;
+    display:block;
+    margin-bottom:6px;
+    color:#374151;
+}
+
+input{
+    width:100%;
+    padding:12px 14px;
+    border-radius:10px;
+    border:1px solid #d1d5db;
+    font-size:14px;
+}
+
+input:focus{
+    outline:none;
+    border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37,99,235,0.15);
+}
+
+.signin-btn{
+    width:100%;
+    margin-top:10px;
+    background:linear-gradient(to right,#2563eb,#1d4ed8);
+    color:white;
+    padding:14px;
+    border-radius:12px;
+    border:none;
+    font-size:15px;
+    cursor:pointer;
+    box-shadow:0 10px 25px rgba(37,99,235,0.3);
+}
+
+.sso-btn{
+    margin-top:20px;
+    width:100%;
+    background:#f9fafb;
+    border:1px solid #e5e7eb;
+    padding:12px;
+    border-radius:12px;
+    cursor:pointer;
+}
+
+.footer{
+    background:white;
+    padding:60px;
+    border-top:1px solid #e5e7eb;
+    margin-top:60px;
+    display:flex;
+    justify-content:space-between;
+    color:#6b7280;
+    font-size:14px;
+}
+
+.footer h4{
+    margin-bottom:15px;
+    color:#111827;
+}
+
+.footer div{
+    width:30%;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">
+        <div class="logo-icon"></div>
+        IssueTracker
+    </div>
+
+    <div class="nav-right">
+        <div class="status-pill">● System Operational</div>
+        <div>Help Center</div>
+        <div>Documentation</div>
+    </div>
+</div>
+
+<!-- HERO -->
+<div class="container">
+
+    <div class="left">
+        <div class="badge">ENTERPRISE ISSUE MANAGEMENT</div>
+        <h1>Report Issues in <span>Seconds.</span></h1>
+        <p>
+            The unified platform for enterprise escalation. Report internal issues,
+            track progress in real-time, and support operational efficiency across every department.
+        </p>
+
+        <div class="buttons">
+            <button class="btn-primary" onclick="window.location.href='report.html'">Report an Issue</button>
+            <button class="btn-secondary" onclick="window.location.href='dashboard.html'">View Dashboard</button>
+        </div>
+    </div>
+
+    <!-- LOGIN CARD -->
+    <div class="right">
+        <div class="login-card">
+            <h2>Internal Access</h2>
+            <p>Please sign in with your corporate credentials.</p>
+
+            <div class="form-group">
+                <label>Corporate Email</label>
+                <input type="email" id="email" placeholder="name@company.com">
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="••••••••">
+            </div>
+
+            <button class="signin-btn" onclick="login()">Sign In to Tracker</button>
+<button class="sso-btn" onclick="ssoLogin()">Sign in for issue </button>
+        </div>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <div>
+        <h4>IssueTracker</h4>
+        Centralizing internal issue management to ensure corporate excellence and cross-departmental transparency.
+    </div>
+
+    <div>
+        <h4>Resources</h4>
+        Incident Guidelines<br><br>
+        SLA Agreements<br><br>
+        IT Support
+    </div>
+
+    <div>
+        <h4>Legal</h4>
+        Privacy Policy<br><br>
+        Compliance<br><br>
+        Terms of Use
+    </div>
+</div>
+
+<script>
+
+function login(){
+    const email=document.getElementById("email").value;
+    const password=document.getElementById("password").value;
+
+    // Admin credentials - redirects to dashboard
+    if(email==="admin@company.com" && password==="1234"){
+        localStorage.setItem("loggedIn","true");
+        localStorage.setItem("userRole","admin");
+        localStorage.setItem("userName","Admin User");
+        window.location.href="dashboard.html";
+    }
+    // SSO credentials - redirects to report
+    else if(email==="i@company.com" && password==="1234"){
+        localStorage.setItem("loggedIn","true");
+        localStorage.setItem("userRole","sso");
+        localStorage.setItem("userName","SSO User");
+        window.location.href="report.html";
+    }
+    else{
+        alert("Invalid corporate credentials.");
+    }
+}
+
+function ssoLogin(){
+    // SSO login with predefined SSO credentials
+    const email="i@company.com";
+    const password="1234";
+    
+    localStorage.setItem("loggedIn","true");
+    localStorage.setItem("userRole","sso");
+    localStorage.setItem("userName","SSO User");
+    window.location.href="report.html";
+}
+
+</script>
+
+</body>
+</html>
