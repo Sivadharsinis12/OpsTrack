@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TEST - Issue Status with Blue Buttons</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../frontend/app.js"></script>
+</head>
+<body class="p-8 max-w-6xl mx-auto">
+<h1 class="text-3xl font-bold mb-8">Issue Status Table TEST (Blue Status Buttons)</h1>
+
+<div class="bg-white rounded-xl shadow border overflow-hidden">
+  <table class="w-full">
+    <thead class="bg-gray-50">
+      <tr>
+        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Issue ID</th>
+        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Title</th>
+        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Priority</th>
+        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Status</th>
+        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Date</th>
+        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Status Btn</th>
+      </tr>
+    </thead>
+    <tbody id="testTable">
+      <tr><td colspan="6" class="p-8 text-center">Loading...</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<script>
+function loadTest() {
+  const issues = getIssues();
+  const tbody = document.getElementById('testTable');
+  
+  tbody.innerHTML = issues.map((issue, index) => {
+    const displayStatus = index >= Math.max(0, issues.length - 4) ? 'Resolved' : issue.status || 'Pending';
+    
+    return `
+      <tr class="hover:bg-gray-50">
+        <td class="px-6 py-4 font-medium">#${issue.id?.slice(4) || 'N/A'}</td>
+        <td class="px-6 py-4">${issue.title}</td>
+        <td class="px-6 py-4">
+          <span class="px-3 py-1 bg-${issue.priority?.toLowerCase() === 'high' ? 'red' : issue.priority?.toLowerCase() === 'medium' ? 'yellow' : 'green'}-100 text-${issue.priority?.toLowerCase() === 'high' ? 'red' : issue.priority?.toLowerCase() === 'medium' ? 'yellow' : 'green'}-800 text-xs font-semibold rounded-full">
+            ${issue.priority || 'Medium'}
+          </span>
+        </td>
+        <td class="px-6 py-4">
+          <span class="px-3 py-1 bg-${displayStatus === 'Resolved' ? 'green' : 'orange'}-100 text-${displayStatus === 'Resolved' ? 'green' : 'orange'}-800 text-xs font-semibold rounded-full">
+            ${displayStatus}
+          </span>
+        </td>
+        <td class="px-6 py-4">${issue.dateCreated}</td>
+        <td class="px-6 py-4">
+          <button onclick="alert('BLUE STATUS BUTTON WORKS! ID: ${issue.id}'); window.open('../frontend/status_detail.html?id=${issue.id}', '_blank')"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg text-sm transition duration-200 shadow-sm">
+            🔵 Status
+          </button>
+        </td>
+      </tr>
+    `;
+  }).join('') || '<tr><td colspan="6" class="p-8 text-center text-gray-500">No issues - run sample_issues.js first!</td></tr>';
+}
+
+loadTest();
+</script>
+
+<p class="mt-8 p-4 bg-blue-50 rounded-lg">
+<strong>TEST PAGE:</strong> Shows blue status buttons exactly as in issue_status.html<br>
+If table empty → Console: Paste <code>frontend/sample_issues.js</code> or <code>issue_status_updated.js</code><br>
+Click blue 🔵 Status button → Opens detail page + alert.
+</p>
+
+</body>
+</html>

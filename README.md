@@ -36,4 +36,3 @@ All data is stored using browser localStorage (no backend required).
 
 ---
 
-## 📂 Project Structure

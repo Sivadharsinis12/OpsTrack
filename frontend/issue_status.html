@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Issue Status - OpsTrack</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>/* FONT */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+body{
+background:#f5f7fb;
+color:#1f2937;
+display:flex;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:230px;
+height:100vh;
+background:#ffffff;
+border-right:1px solid #e5e7eb;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+padding:20px;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+font-weight:600;
+font-size:16px;
+margin-bottom:30px;
+}
+
+.nav a{
+display:flex;
+align-items:center;
+gap:10px;
+padding:10px 12px;
+border-radius:8px;
+text-decoration:none;
+color:#4b5563;
+margin-bottom:6px;
+font-size:14px;
+}
+
+.nav a.active{
+background:#eef2ff;
+color:#2563eb;
+}
+
+.user{
+display:flex;
+align-items:center;
+gap:10px;
+margin-top:20px;
+}
+
+.avatar{
+width:36px;
+height:36px;
+border-radius:50%;
+background:#ddd;
+}
+
+/* MAIN */
+
+.main{
+flex:1;
+display:flex;
+flex-direction:column;
+}
+
+/* TOPBAR */
+
+.topbar{
+background:white;
+height:60px;
+border-bottom:1px solid #e5e7eb;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 30px;
+}
+
+.search{
+width:420px;
+padding:10px 14px;
+border-radius:8px;
+border:1px solid #e5e7eb;
+background:#f9fafb;
+}
+
+.top-icons{
+display:flex;
+align-items:center;
+gap:18px;
+}
+
+/* CONTENT */
+
+.content{
+padding:30px;
+}
+
+/* ISSUE HEADER CARD */
+
+.issue-card{
+background:white;
+border-radius:12px;
+padding:25px;
+border:1px solid #e5e7eb;
+margin-bottom:20px;
+}
+
+.tags{
+display:flex;
+gap:10px;
+margin-bottom:10px;
+}
+
+.tag{
+font-size:12px;
+padding:4px 10px;
+border-radius:20px;
+font-weight:500;
+}
+
+.progress{
+background:#dbeafe;
+color:#1d4ed8;
+}
+
+.priority{
+background:#fee2e2;
+color:#dc2626;
+}
+
+.issue-title{
+font-size:24px;
+font-weight:600;
+margin-bottom:8px;
+}
+
+.issue-desc{
+color:#6b7280;
+font-size:14px;
+max-width:650px;
+}
+
+/* TIMELINE */
+
+.timeline{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-top:30px;
+position:relative;
+}
+
+.timeline::before{
+content:"";
+position:absolute;
+top:16px;
+left:40px;
+right:40px;
+height:3px;
+background:#dbeafe;
+z-index:0;
+}
+
+.step{
+text-align:center;
+position:relative;
+z-index:1;
+}
+
+.circle{
+width:32px;
+height:32px;
+background:#2563eb;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+margin:auto;
+}
+
+.step span{
+display:block;
+font-size:12px;
+margin-top:6px;
+color:#6b7280;
+}
+
+/* GRID */
+
+.grid{
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:20px;
+}
+
+/* CARD */
+
+.card{
+background:white;
+border-radius:12px;
+border:1px solid #e5e7eb;
+padding:20px;
+}
+
+/* COMMENTS */
+
+.comment{
+display:flex;
+gap:12px;
+margin-bottom:16px;
+}
+
+.comment img{
+width:36px;
+height:36px;
+border-radius:50%;
+}
+
+.comment-box{
+background:#f9fafb;
+padding:12px;
+border-radius:8px;
+font-size:14px;
+color:#374151;
+}
+
+.comment-meta{
+font-size:12px;
+color:#9ca3af;
+margin-bottom:4px;
+}
+
+.textarea{
+margin-top:15px;
+width:100%;
+padding:12px;
+border-radius:8px;
+border:1px solid #e5e7eb;
+resize:none;
+height:70px;
+}
+
+.post-btn{
+margin-top:10px;
+background:#2563eb;
+color:white;
+padding:10px 16px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+float:right;
+}
+
+/* METADATA */
+
+.meta-row{
+display:flex;
+justify-content:space-between;
+margin-bottom:12px;
+font-size:14px;
+}
+
+.meta-row span{
+color:#6b7280;
+}
+
+/* ASSETS */
+
+.asset{
+border:1px solid #e5e7eb;
+border-radius:8px;
+padding:10px;
+margin-top:10px;
+font-size:13px;
+}
+
+/* SLA CARD */
+
+.sla{
+margin-top:20px;
+background:#eef2ff;
+border-radius:12px;
+padding:20px;
+}
+
+.timer{
+font-size:26px;
+font-weight:600;
+margin:8px 0;
+}
+
+.bar{
+height:6px;
+background:#c7d2fe;
+border-radius:6px;
+overflow:hidden;
+}
+
+.bar-fill{
+height:6px;
+background:#2563eb;
+width:70%;
+}</style></head>
+
+<body class="bg-gray-100 font-sans">
+
+<div class="flex min-h-screen">
+
+<!-- Sidebar - matching report.html style -->
+<div class="w-60 bg-gray-50 border-r border-gray-200 p-8 flex flex-col justify-between">
+    <div>
+        <h1 class="text-2xl font-bold text-blue-600 mb-8">IssueTrack</h1>
+        <ul class="space-y-2">
+            <li><a href="dashboard.html" class="block p-3 rounded-lg text-gray-600 hover:text-blue-600 hover:bg-blue-50">Dashboard</a></li>
+            <li><a href="report.html" class="block p-3 rounded-lg text-gray-600 hover:text-blue-600 hover:bg-blue-50">Report Issue</a></li>
+            <li><a href="issue_status.html" class="block p-3 bg-blue-50 text-blue-600 font-semibold rounded-lg">Issue Status</a></li>
+            <li><a href="history.html" class="block p-3 rounded-lg text-gray-600 hover:text-blue-600 hover:bg-blue-50">History</a></li>
+        </ul>
+    </div>
+    <div class="text-sm text-gray-500">
+        <div class="font-medium">Alex Henderson</div>
+        <div>Senior Developer</div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="flex-1 p-8">
+
+    <h1 class="text-3xl font-bold mb-8">Issue Status Overview</h1>
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-3 gap-6 mb-8">
+        <div class="bg-white p-6 rounded-xl shadow-sm border">
+            <h3 class="text-gray-500 text-sm font-medium mb-1">Total Issues</h3>
+            <p id="totalCount" class="text-3xl font-bold text-gray-900">0</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-sm border">
+            <h3 class="text-gray-500 text-sm font-medium mb-1">Pending</h3>
+            <p id="pendingCount" class="text-3xl font-bold text-orange-600">0</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-sm border">
+            <h3 class="text-gray-500 text-sm font-medium mb-1">Resolved</h3>
+            <p id="resolvedCount" class="text-3xl font-bold text-green-600">0</p>
+        </div>
+    </div>
+
+    <!-- Issues Table -->
+    <div class="bg-white rounded-xl shadow-sm border overflow-hidden">
+        <div class="p-6 border-b">
+            <h2 class="text-xl font-semibold">Recent Issues</h2>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Issue ID</th>
+                        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Title</th>
+                        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Priority</th>
+                        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Status</th>
+                        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Date Created</th>
+                        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="statusTableBody" class="divide-y divide-gray-200">
+                    <tr>
+                        <td colspan="5" class="px-6 py-12 text-center text-gray-500">No issues yet. Report one to get started!</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+<script src="app.js"></script>
+<script>
+function loadStatusData() {
+    const issues = getIssues();
+    const stats = getStats();
+
+    // Update stats
+    document.getElementById('totalCount').textContent = stats.total;
+    document.getElementById('pendingCount').textContent = stats.pending;
+    document.getElementById('resolvedCount').textContent = stats.resolved;
+
+    // Update table
+    const tbody = document.getElementById('statusTableBody');
+    if (issues.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" class="px-6 py-12 text-center text-gray-500">No issues yet. <a href="report.html" class="text-blue-600 hover:underline">Report one to get started</a>!</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = issues.map(issue => `
+        <tr>
+            <td class="px-6 py-4 text-sm font-medium text-gray-900">${issue.id || 'N/A'}</td>
+            <td class="px-6 py-4 text-sm text-gray-900 max-w-md truncate">${issue.title || 'Untitled'}</td>
+            <td class="px-6 py-4">
+                <span class="px-2 py-1 text-xs font-semibold rounded-full ${
+                    issue.priority === 'High' ? 'bg-red-100 text-red-800' :
+                    issue.priority === 'Medium' ? 'bg-yellow-100 text-yellow-800' :
+                    'bg-green-100 text-green-800'
+                }">
+                    ${issue.priority || 'Medium'}
+                </span>
+            </td>
+            <td class="px-6 py-4">
+                <span class="px-2 py-1 text-xs font-semibold rounded-full ${
+                    issue.status === 'Resolved' ? 'bg-green-100 text-green-800' :
+                    'bg-orange-100 text-orange-800'
+                }">
+                    ${issue.status || 'Pending'}
+                </span>
+            </td>
+            <td class="px-6 py-4 text-sm text-gray-600">${issue.dateCreated || 'N/A'}</td>
+        </tr>
+    `).join('');
+}
+
+// Auto-resolve old issues (consistent with dashboard)
+function autoResolveOldIssues() {
+    // Implementation same as dashboard/history
+    let issues = getIssues();
+    let updated = false;
+    
+    issues = issues.map(issue => {
+        if (issue.status === "Pending") {
+            const createdDate = issue.dateCreated;
+            const createdTime = issue.timeCreated;
+            if (createdDate && createdTime) {
+                const dateTimeStr = createdDate + ' ' + createdTime;
+                const createdDateTime = new Date(dateTimeStr);
+                const now = new Date();
+                const hoursDiff = (now - createdDateTime) / (1000 * 60 * 60);
+                if (hoursDiff >= 15) {
+                    issue.status = "Resolved";
+                    issue.dateClosed = new Date().toLocaleDateString();
+                    issue.resolution = "Auto-resolved after 15 hours";
+                    updated = true;
+                }
+            }
+        }
+        return issue;
+    });
+    
+    if (updated) saveIssues(issues);
+}
+
+// Load on page ready
+document.addEventListener('DOMContentLoaded', () => {
+    autoResolveOldIssues();
+    loadStatusData();
+});
+</script>
+
+</body>
+</html>

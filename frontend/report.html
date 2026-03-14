@@ -39,7 +39,7 @@ body{
     margin-bottom:40px;
 }
 
-.menu a{
+.menu a.menu-item{
     display:block;
     padding:12px 14px;
     border-radius:10px;
@@ -47,9 +47,10 @@ body{
     color:#374151;
     margin-bottom:8px;
     font-size:15px;
+    cursor:pointer;
 }
 
-.menu a.active{
+.menu a.active, .menu a.menu-item:hover{
     background:#e0e7ff;
     color:#1d4ed8;
     font-weight:500;
@@ -276,10 +277,12 @@ textarea{
 <div class="sidebar">
     <div>
         <div class="logo">IssueTrack</div>
-        <div class="menu"></div>
-            <a href="report.html" class="active">Report Issue</a>
+<div class="menu">
             
+            <a href="report.html" class="active menu-item">Report Issue</a>
+            <a href="issue_status.html" class="menu-item">Issue Status</a>
         </div>
+
     </div>
 
     <div class="user">
